@@ -1,0 +1,23 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: "DynaPuff", system-ui;
+  background-image: url("./assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  :root {
+    background-image: url("./assets/background_mobile.png");
+    background-position: center;
+    background-size: cover;
+  }
+}
