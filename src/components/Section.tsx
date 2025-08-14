@@ -9,16 +9,18 @@ const Section = (props: props) => {
   const theme = useTheme();
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, md: 4 } }}>
-      <Typography
-        variant="h5"
-        color="primary"
-        sx={{
-          mr: { xs: 1, md: 4 },
-          width: { xs: "unset", md: 200 },
-        }}
-      >
-        {title}
-      </Typography>
+      {title && (
+        <Typography
+          variant="h5"
+          color="primary"
+          sx={{
+            mr: { xs: 1, md: 4 },
+            width: { xs: "unset", md: 200 },
+          }}
+        >
+          {title}
+        </Typography>
+      )}
 
       <Divider
         sx={{ flex: 1, bgcolor: theme.palette.primary.main, height: "3px" }}

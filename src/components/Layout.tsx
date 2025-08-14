@@ -13,6 +13,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 import { useState } from "react";
 import CButton from "./Buttons";
+import Footer from "./Footer";
 
 const Layout = () => {
   const location = useLocation();
@@ -69,8 +70,8 @@ const Layout = () => {
             <CButton
               variantType="primary"
               component={Link}
-              to="/contactus"
-              disabled={location.pathname === "/contactus"}
+              to="/contact-us"
+              disabled={location.pathname === "/contact-us"}
             >
               Contact us
             </CButton>
@@ -104,9 +105,9 @@ const Layout = () => {
               </MenuItem>
               <MenuItem
                 component={Link}
-                to="/contactus"
+                to="/contact-us"
                 onClick={handleMenuClose}
-                disabled={location.pathname === "/contactus"}
+                disabled={location.pathname === "/contact-us"}
               >
                 Contact us
               </MenuItem>
@@ -116,9 +117,11 @@ const Layout = () => {
       </AppBar>
 
       {/* Content */}
-      <Container maxWidth={"xl"} sx={{ mt: 4 }}>
+      <Container maxWidth={"xl"} sx={{ my: 4 }}>
         <Outlet />
       </Container>
+
+      <Footer />
     </Box>
   );
 };
