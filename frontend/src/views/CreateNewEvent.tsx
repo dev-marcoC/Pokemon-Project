@@ -34,7 +34,7 @@ const CreateNewEvent = (props: Props) => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.dataEvento) {
@@ -47,11 +47,49 @@ const CreateNewEvent = (props: Props) => {
       return;
     }
 
-    console.log("Dati inviati:", {
-      ...formData,
+    // Prepara payload
+    const payload = {
+      nomeEvento: formData.nomeEvento,
       dataEvento: formData.dataEvento.format("YYYY-MM-DD"),
       oraEvento: formData.oraEvento ? formData.oraEvento.format("HH:mm") : null,
-    });
+      tipologiaEvento: formData.tipologiaEvento,
+      luogoEvento: formData.luogoEvento,
+      nomeOrganizzatore: formData.nomeOrganizzatore,
+      contatto: formData.contatto,
+      maxPartecipanti: formData.maxPartecipanti,
+      note: formData.note,
+    };
+
+    try {
+      const res = await fetch("http://localhost:8000/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Errore server: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log("Evento creato:", data);
+
+      alert("Evento creato con successo!");
+      setFormData({
+        nomeEvento: "",
+        dataEvento: null,
+        oraEvento: null,
+        tipologiaEvento: "",
+        luogoEvento: "",
+        nomeOrganizzatore: "",
+        contatto: "",
+        maxPartecipanti: "",
+        note: "",
+      });
+    } catch (err) {
+      console.error("Errore creazione evento:", err);
+      alert("Errore durante la creazione dell'evento");
+    }
   };
 
   return (
