@@ -5,9 +5,10 @@ body {
     margin: 0;
     height: 100vh;
     background: url("./assets/filigrana.png") no-repeat right center,
-      /* PNG sopra */ linear-gradient(to bottom, #5c258d, #4389a2); /* gradiente sotto */
-    background-size: auto, cover; /* primo = PNG, secondo = gradiente */
-    background-attachment: fixed, fixed; /* fissi entrambi */
+      /* linear-gradient(to bottom, #5c258d, #4389a2) */
+        linear-gradient(to right, #141e30, #243b55);
+    background-size: auto, cover;
+    background-attachment: fixed, fixed;
   }
 }
 

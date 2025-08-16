@@ -4,12 +4,14 @@ import Section from "../components/Section";
 import CButton from "../components/Buttons";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Event from "../components/Event";
 
-interface EventType {
+export interface EventType {
   id: number;
   nomeEvento: string;
-  dataEvento: string | null;
-  oraEvento: string | null;
+  dataEvento: string;
+  oraEvento: string;
   tipologiaEvento: string;
   luogoEvento: string;
   nomeOrganizzatore: string;
@@ -48,16 +50,17 @@ const Events = () => {
           </CButton>
         </Box>
 
-        {events.length > 0 ? (
-          events.map((event) => (
-            <div key={event.id}>
-              <strong>{event.nomeEvento}</strong> - {event.dataEvento}{" "}
-              {event.oraEvento}
-            </div>
-          ))
-        ) : (
-          <p>No events found</p>
-        )}
+        <Grid container spacing={2} mt={3}>
+          {events.length > 0 ? (
+            events.map((event) => (
+              <Grid size={4}>
+                <Event key={event.id} info={event}></Event>
+              </Grid>
+            ))
+          ) : (
+            <p>No events found</p>
+          )}
+        </Grid>
       </Box>
     </>
   );
