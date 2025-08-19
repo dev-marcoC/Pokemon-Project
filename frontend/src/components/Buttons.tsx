@@ -5,6 +5,7 @@ interface CButtonProps extends ButtonProps {
   variantType?: "primary" | "secondary" | "tertiary";
   to?: string;
   component?: React.ElementType;
+  fullWidth?: boolean;
 }
 
 const CButton = ({ variantType = "primary", ...props }: CButtonProps) => {
@@ -31,11 +32,23 @@ const CButton = ({ variantType = "primary", ...props }: CButtonProps) => {
           color: theme.palette.primary.main,
         },
       };
+
+      break;
+    case "tertiary":
+      styles = {
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.primary.main,
+        "&:hover": {
+          backgroundColor: theme.palette.tertiary.main,
+          color: theme.palette.primary.main,
+        },
+      };
       break;
   }
 
   return (
     <Button
+      fullWidth={props.fullWidth}
       {...props}
       sx={{
         textTransform: "none",

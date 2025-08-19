@@ -53,8 +53,8 @@ const Events = () => {
         <Grid container spacing={2} mt={3}>
           {events.length > 0 ? (
             events.map((event) => (
-              <Grid size={4}>
-                <Event key={event.id} info={event}></Event>
+              <Grid key={event.id} size={{ xs: 6, md: 4 }}>
+                <Event info={event}></Event>
               </Grid>
             ))
           ) : (

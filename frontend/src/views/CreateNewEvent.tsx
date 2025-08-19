@@ -9,10 +9,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import Section from "../components/Section";
 import CButton from "../components/Buttons";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
 const CreateNewEvent = (props: Props) => {
+  const [isLoading, setisLoading] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nomeEvento: "",
     dataEvento: null as Dayjs | null,
@@ -61,6 +64,7 @@ const CreateNewEvent = (props: Props) => {
     };
 
     try {
+      setisLoading(true);
       const res = await fetch("http://localhost:8000/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -74,7 +78,6 @@ const CreateNewEvent = (props: Props) => {
       const data = await res.json();
       console.log("Evento creato:", data);
 
-      alert("Evento creato con successo!");
       setFormData({
         nomeEvento: "",
         dataEvento: null,
@@ -86,9 +89,10 @@ const CreateNewEvent = (props: Props) => {
         maxPartecipanti: "",
         note: "",
       });
+      setisLoading(false);
+      navigate("/");
     } catch (err) {
       console.error("Errore creazione evento:", err);
-      alert("Errore durante la creazione dell'evento");
     }
   };
 
@@ -228,7 +232,6 @@ const CreateNewEvent = (props: Props) => {
             onChange={handleChange}
             fullWidth
             color="secondary"
-            inputProps={{ min: 1 }}
           />
 
           <TextField
@@ -246,6 +249,7 @@ const CreateNewEvent = (props: Props) => {
           <CButton
             type="submit"
             variant="contained"
+            loading={isLoading}
             sx={{ mt: 2, alignSelf: "center" }}
           >
             Salva Evento
